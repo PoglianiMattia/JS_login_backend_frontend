@@ -1,0 +1,14 @@
+{
+  "name": "backend-server",
+  "version": "1.0.0",
+  "description": "nodejs api rest server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "pogliani.mattia",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}

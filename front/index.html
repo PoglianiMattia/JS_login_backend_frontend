@@ -1,5 +1,5 @@
 <html>
-  <body>
+  <body id="body">
     <script
       src="https://code.jquery.com/jquery-3.6.0.min.js"
       integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
@@ -14,21 +14,24 @@
       $("#b1").click(function () {
         var mail = $("#mail").val();
         var password = $("#pwd").val();
-        if (mail && password) console.log("valori:", mail, password);
-        $.ajax({
-          url:
-            "http://locahost:3000/api/login?mail=" +
-            mail +
-            "&password=" +
-            password,
-          method: "GET",
-          success: function (data) {
-            console.log("success", data);
-          },
-          error: function (data) {
-            console.log("error", data);
-          },
-        });
+        if (mail && password) {
+          $.ajax({
+            url:
+              "http://localhost:3000/api/login?mail=" +
+              mail +
+              "&password=" +
+              password,
+            method: "GET",
+            success: function (data) {
+              console.log("success", data);
+              $("body").css("background-color","green");
+            },
+            error: function (data) {
+              console.log("error", data);
+              $("body").css("background-color","red");
+            },
+          });
+        }
       });
     </script>
   </body>

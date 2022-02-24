@@ -9,9 +9,11 @@
     <input type="text" id="mail" placeholder="email" />
     inserire password:
     <input type="password" id="pwd" placeholder="password" />
-    <button id="b1">invia</button>
+    <button id="in">sign-in</button>
+    <button id="up">signi-up</button>
+    <h1 id="h1"></h1>
     <script>
-      $("#b1").click(function () {
+      $("#in").click(function () {
         var mail = $("#mail").val();
         var password = $("#pwd").val();
         if (mail && password) {
@@ -24,11 +26,33 @@
             method: "GET",
             success: function (data) {
               console.log("success", data);
-              $("body").css("background-color","green");
+              $("body").css("background-color", "green");
             },
             error: function (data) {
               console.log("error", data);
-              $("body").css("background-color","red");
+              $("body").css("background-color", "red");
+            },
+          });
+        }
+      });
+      $("#up").click(function () {
+        var mail = $("#mail").val();
+        var password = $("#pwd").val();
+        if (mail && password) {
+          $.ajax({
+            url:
+              "http://localhost:3000/api/register?mail=" +
+              mail +
+              "&password=" +
+              password,
+            method: "GET",
+            success: function (data) {
+              console.log("success", data);
+              $("#h1").html("registrazione avvenuta correttamente");
+            },
+            error: function (data) {
+              console.log("error", data);
+              $("#h1").html("registrazione fallita");
             },
           });
         }

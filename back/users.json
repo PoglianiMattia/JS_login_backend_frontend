@@ -1,1 +1,6 @@
-[{ "mail": "mattia", "password": "pogliani" }]
+[
+  { "mail": "mattia", "password": "pogliani" },
+  { "mail": "m", "password": "m" },
+  { "mail": "e", "password": "e" },
+  { "mail": "e", "password": "r" }
+]

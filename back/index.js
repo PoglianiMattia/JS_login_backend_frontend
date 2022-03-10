@@ -25,7 +25,7 @@ apiServer.get("/api/login", (req, res) => {
   console.log("ricevuti:", req.query.mail, req.query.password);
 
   connection.query(
-    'SELECT count(*) AS utenti FROM c153_5BI1.Users WHERE mail = "' +
+    'SELECT count(*) AS utenti FROM c153_5AITPS.Utenti WHERE mail = "' +
       req.query.mail +
       '" AND password="' +
       req.query.password +
@@ -43,17 +43,16 @@ apiServer.get("/api/login", (req, res) => {
 
 apiServer.get("/api/register", (req, res) => {
   console.log("ricevuti:", req.query.mail, req.query.password);
-  fs.readFile("users.json", (err, data) => {
-    if (err) {
-      console.log(err);
-      res.status(500).json({ message: "errore generico" });
-    } else {
-      var users = JSON.parse(data);
-      users.push({ mail: req.query.mail, password: req.query.password });
-      fs.writeFile("users.json", JSON.stringify(users), (err) => {
-        if (err) res.status(400).json({ message: "sign-up failed" });
-        else res.status(200).json({ message: "sign-up success" });
-      });
+  connection.query(
+    'INSERT INTO c153_5AITPS.Utenti (mail, password) VALUES (?, ?);',
+    [req.query.mail, req.query.password],
+    function (err, results) {
+      console.log(err, results);
+      if (results) {
+        res.status(200).json({ message: "sign-up success" });
+      } else {
+        res.status(400).json({ message: "sign-up failed" });
+      }
     }
-  });
+  );
 });
